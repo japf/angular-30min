@@ -1,0 +1,51 @@
+<!-- 
+	Angular in 30min
+	Jeremy Alles @jalpf
+
+	1. Data Binding and Directives
+	2. Filters
+	3. Modules and Controllers
+	4. Routes
+	5. Factories
+	6. Bonus
+-->
+<!DOCTYPE html>
+<html ng-app="customerApp">
+<head>
+	<title>AngularJS demo</title>
+	<link href="styles/bootstrap.css" rel="stylesheet"/>
+	<link href="styles/animations.css" rel="stylesheet"/>
+	<link href="styles/general.css" rel="stylesheet"/>
+<head>
+<body>
+	<h1>AngularJS demo</h1> 
+	
+	<div ng-controller="CustomerListController">
+		<p ng-repeat="customer in customers">
+			<my-customer item="customer"></my-customer>
+		</p>
+	</div>
+
+	<script src="js/angular.js"></script>
+
+	<script>
+		var app = angular.module('customerApp', []);
+
+		app.directive('myCustomer', function() {
+		    return {
+	      		restrict: 'E',
+	      		scope: {
+		        	item: '=item'
+		      	},
+	      		template: '<p>Customer: {{item.name}} {{item.total}}</p>'
+		    };
+	  	});
+
+		app.controller('CustomerListController', function($scope, $http) {
+			$http.get('/api/customers').success(function(data){
+				$scope.customers = data;
+			});
+		});
+	</script>
+</body>
+</html>

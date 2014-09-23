@@ -10,4 +10,6 @@ server.use('/api/customers', function (req, res, next) {
 		{ id: 2, name: 'Guillaume', total: 299 }
 	]));
 });
+
+
 server.use(serveStatic("../client")).listen(8080);

@@ -1,0 +1,39 @@
+<!-- 
+	Angular in 30min
+	Jeremy Alles @jalpf
+
+	1. Data Binding and Directives
+	2. Filters
+	3. Modules and Controllers
+	4. Routes
+	5. Factories
+	6. Bonus
+-->
+<!DOCTYPE html>
+<html ng-app>
+<head>
+	<title>AngularJS demo in 30 minutes !</title>
+	<link href="styles/bootstrap.css" rel="stylesheet"/>
+	<link href="styles/animations.css" rel="stylesheet"/>
+	<link href="styles/general.css" rel="stylesheet"/>
+<head>
+<body ng-init="customers=['Jeremy', 'Yohan', 'Guillaume']">
+	<h1>AngularJS demo in 30 minutes !</h1> 
+	
+	<div>
+		Search: <input type="text" ng-model="searchText"/>
+		<br/>
+		<h3>Customers:</h3>
+		<table>
+			<tr ng-repeat="customer in customers | filter: searchText">
+				<td>{{customer}}</td>
+			</tr>
+		</table>
+	</div>
+
+	<script src="js/angular.js"></script>
+	<script>
+		
+	</script>
+</body>
+</html>

@@ -10,53 +10,51 @@
 	6. Bonus
 -->
 <!DOCTYPE html>
-<html>
+<html ng-app="customerApp">
 <head>
 	<title>AngularJS demo</title>
 	<link href="styles/bootstrap.css" rel="stylesheet"/>
 	<link href="styles/animations.css" rel="stylesheet"/>
 	<link href="styles/general.css" rel="stylesheet"/>
 <head>
-<body ng-app="customerApp">
-	<h1>AngularJS</h1> 
+<body>
+	<h1>AngularJS demo</h1> 
 	
 	<div ng-view class="view-animation"></div>
 
 	<script src="js/angular.js"></script>
 	<script src="js/angular-route.js"></script>
 	<script src="js/angular-animate.js"></script>
-
 	<script>
 		var app = angular.module('customerApp', ['ngRoute', 'ngAnimate']);
 
 		app.config(function($routeProvider){
-			$routeProvider.when(
+			$routeProvider
+			.when(
 				'/',
 				{
-					controller: 'CustomerListController',
+					controller: 'CustomerList',
 					templateUrl: 'views/customerList.html'
-				}).when(
+				})
+			.when(
 				'/detail/:id',
 				{
-					controller: 'CustomerDetailController',
+					controller: 'CustomerDetail',
 					templateUrl: 'views/customerDetail.html'
-				}
-				);
-
+				});
 		});
 
-		app.controller('CustomerListController', function($scope, $http){
-				$http.get('/api/customers').success(function(data) {
-					$scope.customers = data;
-				})
+		app.controller('CustomerList', function($scope, $http) {
+			$http.get('/api/customers').success(function(data){
+				$scope.customers = data;
+			});
 		});
 
-		app.controller('CustomerDetailController', function($scope, $routeParams, $http)
-		{
-			$http.get('/api/customers').success(function(data) {
-					$scope.customer = data[$routeParams.id];
-				})
-		})
+		app.controller('CustomerDetail', function($scope, $http, $routeParams){
+			$http.get('/api/customers').success(function(data){
+				$scope.customer = data[$routeParams.id];
+			});
+		});
 	</script>
 </body>
 </html>

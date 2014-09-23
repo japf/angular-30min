@@ -1,0 +1,48 @@
+<!-- 
+	Angular in 30min
+	Jeremy Alles @jalpf
+
+	1. Data Binding and Directives
+	2. Filters
+	3. Modules and Controllers
+	4. Routes
+	5. Factories
+	6. Bonus
+-->
+<!DOCTYPE html>
+<html ng-app="customerApp">
+<head>
+	<title>AngularJS demo in 30 minutes !</title>
+	<link href="styles/bootstrap.css" rel="stylesheet"/>
+	<link href="styles/animations.css" rel="stylesheet"/>
+	<link href="styles/general.css" rel="stylesheet"/>
+<head>
+<body>
+	<h1>AngularJS demo in 30 minutes !</h1> 
+	
+	<div ng-controller="CustomerList">
+		Search: <input type="text" ng-model="searchText"/>
+		<br/>
+		<h3>Customers:</h3>
+		<table>
+			<tr ng-repeat="customer in customers | filter: searchText">
+				<td>{{customer.name}}</td>
+				<td>{{customer.total | currency}}</td>
+			</tr>
+		</table>
+	</div>
+
+	<script src="js/angular.js"></script>
+	<script>
+		var app = angular.module('customerApp', []);
+
+		app.controller('CustomerList', function($scope, $http) {
+			$scope.customers = [
+				{ id: 0, name: 'Jeremy', total: 149 },
+				{ id: 1, name: 'Yohan', total: 79 },
+				{ id: 2, name: 'Guillaume', total: 299 }
+			];
+		});
+	</script>
+</body>
+</html>
